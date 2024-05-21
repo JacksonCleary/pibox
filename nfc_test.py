@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-from lib.pn532_nfc_hat.pn532 import PN532_SPI
+from gitreqs.pn532_nfc_hat.pn532 import PN532_SPI
 
 if __name__ == '__main__':
     try:
