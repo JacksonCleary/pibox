@@ -22,7 +22,7 @@ if __name__ == '__main__':
             uid = pn532.read_passive_target(timeout=0.5)
 
             if uid is not None:
-                print('Card UID 0x{0}'.format(binascii.hexlify(uid)))
+                print(binascii.hexlify(uid).decode()[2:])
                 card_scanned = True
 
     except PN532.PN532Exception as e:
