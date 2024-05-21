@@ -39,7 +39,7 @@ if __name__ == '__main__':
 
                 card_scanned = True
 
-    except PN532.PN532Exception as e:
+    except Exception as e:
         print(e)
     finally:
         GPIO.cleanup()
