@@ -1,4 +1,5 @@
 import RPi.GPIO as GPIO
+import binascii
 from pn532 import *
 
 if __name__ == '__main__':
@@ -21,7 +22,7 @@ if __name__ == '__main__':
             uid = pn532.read_passive_target(timeout=0.5)
 
             if uid is not None:
-                print('Found card with UID:', [hex(i) for i in uid])
+                print('Card UID 0x{0}'.format(binascii.hexlify(uid)))
                 card_scanned = True
 
     except PN532.PN532Exception as e:
