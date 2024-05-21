@@ -1,6 +1,13 @@
 import RPi.GPIO as GPIO
 import binascii
+import os
 from pn532 import *
+from dotenv import load_dotenv
+from csv_utils import get_value_from_csv_or_remote
+
+load_dotenv()
+
+REMOTE_CSV_LOCATION = os.getenv('REMOTE_CSV_LOCATION')
 
 if __name__ == '__main__':
     try:
@@ -22,7 +29,14 @@ if __name__ == '__main__':
             uid = pn532.read_passive_target(timeout=0.5)
 
             if uid is not None:
-                print(binascii.hexlify(uid).decode()[2:])
+                uid_str = binascii.hexlify(uid).decode()[2:]
+                print(uid_str)
+
+                # Call the get_value_from_csv_or_remote function with the UID as the key
+                csv_file = "file.csv"
+                value = get_value_from_csv_or_remote(uid_str, csv_file, REMOTE_CSV_LOCATION)
+                print(value)
+
                 card_scanned = True
 
     except PN532.PN532Exception as e:
